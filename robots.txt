@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /source/
+Disallow: /tools/
+Disallow: /medicine-price-list.txt
+Sitemap: https://toppharma.co.uk/sitemap.xml

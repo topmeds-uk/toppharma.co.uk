@@ -1,0 +1,23 @@
+﻿const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'..');
+const apache=`Options -Indexes -MultiViews
+DirectoryIndex index.html
+RewriteEngine On
+RewriteRule ^(?:source|tools|\\.git)(?:/|$) - [F,L]
+RewriteRule ^(?:medicine-price-list\\.txt|README\\.md)$ - [F,L,NC]
+RewriteCond %{HTTP_HOST} ^(?:www\\.)?toppharma\\.co\\.uk$ [NC]
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\\. [NC]
+RewriteRule ^ https://toppharma.co.uk%{REQUEST_URI} [R=301,L,NE]
+RewriteCond %{THE_REQUEST} \\s/+(.*/)?index\\.html(?:[?\\s]) [NC]
+RewriteRule ^(.*/)?index\\.html$ /%1 [R=301,L]
+<If "%{HTTP_HOST} =~ /^(localhost|127\\.0\\.0\\.1)(:[0-9]+)?$/">
+ErrorDocument 404 /toppharma.co.uk/404/error.php
+</If>
+<Else>
+ErrorDocument 404 /404/error.php
+</Else>
+`;
+fs.writeFileSync(path.join(root,'.htaccess'),apache);
+console.log('Applied local and production routing rules.');

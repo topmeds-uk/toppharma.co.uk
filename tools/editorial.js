@@ -1,0 +1,20 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..');
+const pages=JSON.parse(fs.readFileSync(path.join(__dirname,'pages.json'),'utf8'));
+// Shared editorial refinements are applied at build time so rebuilding is repeatable.
+const replacements=[
+ ['Start with the patient information leaflet for the exact medicine you have been prescribed. Check the name, formulation and strength on your packaging against the leaflet.','Before reading about a medicine, check the name, strength and preparation on your packaging. The patient leaflet for that exact product is your starting point.'],
+ ['This page is a navigation guide. It does not confirm the availability, licensing status or suitability of a particular brand or preparation.','Use this page to find a patient resource and prepare questions. A directory entry does not establish UK availability or confirm that a preparation is right for you.'],
+ ['Ask your prescriber or pharmacist before making changes to your treatment. This website cannot provide an individual assessment or a dosing plan.','Bring any concerns about your treatment to your prescriber or dispensing pharmacist. Top Pharma cannot assess your circumstances or suggest a personal dosing plan.'],
+ ['Make a note of your symptoms, how they affect your daily life and what you would like to understand. Take a list of your current medicines to your appointment.','Before an appointment, write down the question you most want answered. Record when your symptoms occur and bring an up-to-date list of medicines and supplements.'],
+ ['Ask your healthcare professional which options are appropriate for your circumstances, what follow-up you need and where to find reliable patient information.','Your care team can explain how treatment choices relate to your history. Ask how progress will be reviewed and which patient resources apply to your situation.'],
+ ['Top Pharma is an independent information website for people who want a clearer starting point for medicine questions. Browse by name or topic, then use the linked patient resources to explore further.','Top Pharma brings medicine reference links and practical appointment questions into one quiet, easy-to-browse directory. Start with a name or health topic and follow the resource that fits your question.'],
+ ['A medicine directory, topic pages and practical information about preparing for conversations with a doctor or pharmacist.','Our guides help you locate patient information, while topic pages organise related resources. Prescription and delivery pages focus on questions to take to the healthcare service looking after you.'],
+ ['Contact the doctor who prescribed your medicine or the pharmacist who dispensed it. They can consider your treatment history and the exact product you have.','For advice about a medicine you take, start with your prescriber or dispensing pharmacist. Have the packaging and a note of your question nearby so they can identify the preparation.'],
+ ['Medicine pages link to NHS resources where available and to the electronic Medicines Compendium for product leaflet searches. Our pages do not replace those resources or professional advice.','We link to NHS medicine information and the electronic Medicines Compendium. Reference links are provided alongside each guide; they are separate services with their own editorial processes. Top Pharma does not claim a clinical review of its pages.']
+];
+for(const {file} of pages){const target=path.join(root,file);let html=fs.readFileSync(target,'utf8');for(const [a,b] of replacements)html=html.replaceAll(a,b);html=html.replace('</head>','<meta name="referrer" content="strict-origin-when-cross-origin"></head>');fs.writeFileSync(target,html);}
+let apache=fs.readFileSync(path.join(root,'.htaccess'),'utf8').replace('topmeds','toppharma');
+apache=apache.replace('RewriteEngine On','RewriteEngine On\nRewriteRule ^setup\\.js$ - [F,L,NC]');
+fs.writeFileSync(path.join(root,'.htaccess'),apache);
+console.log('Applied Top Pharma editorial content and source protection.');
