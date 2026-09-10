@@ -74,3 +74,4 @@ write('tools/pages.json',JSON.stringify(pages,null,2));
 console.log(`Built ${pages.length} indexable pages and a 404 page.`);
 require('./finalize');
 require('./editorial');
+require('./brand-assets');
