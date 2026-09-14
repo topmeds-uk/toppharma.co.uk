@@ -14,3 +14,5 @@ body{background:#fffef9;font-family:"Segoe UI",Arial,sans-serif}h1,h2{font-famil
 @media(max-width:380px){.categorygrid,.medicinegrid,.valuegrid{grid-template-columns:1fr}.hero h1{font-size:40px}.logo{font-size:25px}}
 h1{font-size:35px!important}h2{font-size:28px!important}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif!important;font-style:normal!important;font-weight:400!important}.section{padding-block:56px}@media(max-width:760px){.section{padding-block:36px}}
+.about-page .about-content{padding-bottom:16px}.about-page .faq{padding-top:16px}
+.about-page .faq{padding-bottom:8px}.about-page .faq + .section{padding-top:8px}
