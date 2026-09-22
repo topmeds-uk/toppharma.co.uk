@@ -1,4 +1,4 @@
-﻿const fs=require('fs');
+const fs=require('fs');
 const path=require('path');
 const root=path.resolve(__dirname,'..');
 const apache=`Options -Indexes -MultiViews
@@ -10,6 +10,7 @@ RewriteCond %{HTTP_HOST} ^(?:www\\.)?toppharma\\.co\\.uk$ [NC]
 RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\\. [NC]
 RewriteRule ^ https://toppharma.co.uk%{REQUEST_URI} [R=301,L,NE]
+RewriteRule ^category/anxiety/?$ /shop/categories/anxiety-panic-and-seizure-disorder-medicines/ [R=301,L,NE]
 RewriteCond %{THE_REQUEST} \\s/+(.*/)?index\\.html(?:[?\\s]) [NC]
 RewriteRule ^(.*/)?index\\.html$ /%1 [R=301,L]
 <If "%{HTTP_HOST} =~ /^(localhost|127\\.0\\.0\\.1)(:[0-9]+)?$/">
