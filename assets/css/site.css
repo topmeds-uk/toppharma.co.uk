@@ -16,3 +16,18 @@ h1{font-size:35px!important}h2{font-size:28px!important}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif!important;font-style:normal!important;font-weight:400!important}.section{padding-block:56px}@media(max-width:760px){.section{padding-block:36px}}
 .about-page .about-content{padding-bottom:16px}.about-page .faq{padding-top:16px}
 .about-page .faq{padding-bottom:8px}.about-page .faq + .section{padding-top:8px}
+
+/* TopPharma privacy page - reduce gap before FAQ */
+section.section.wrap.privacy-content {
+    padding-bottom: 5px !important;
+    margin-bottom: 0 !important;
+}
+
+section.section.wrap.privacy-content .reading {
+    margin-bottom: 0 !important;
+}
+
+section.section.wrap.privacy-content + section.section.wrap.faq {
+    padding-top: 15px !important;
+    margin-top: 0 !important;
+}
