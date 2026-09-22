@@ -42,19 +42,3 @@ section.section.wrap.anxiety-content + section.section.wrap.faq {
     margin-top: 0 !important;
 }
 
-.category-heading-link {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 5px;
-    text-decoration-thickness: 1px;
-}
-
-.category-heading-link span {
-    display: inline-block;
-    margin-left: 8px;
-    transition: transform .2s ease;
-}
-
-.category-heading-link:hover span {
-    transform: translateX(4px);
-}
