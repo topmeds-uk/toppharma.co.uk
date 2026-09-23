@@ -43,8 +43,19 @@ section.section.wrap.anxiety-content + section.section.wrap.faq {
 }
 
 @media (min-width: 761px) {
-    .hero-index {
+    .hero-image-box {
         order: -1;
     }
+}
+
+.hero-image-box {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 4 / 3;
+    min-height: 280px;
+    border: 2px dashed #bdcce1;
+    border-radius: 24px;
+    background: #f5f7fc;
+    margin-inline: auto;
 }
 
