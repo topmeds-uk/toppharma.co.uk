@@ -42,3 +42,9 @@ section.section.wrap.anxiety-content + section.section.wrap.faq {
     margin-top: 0 !important;
 }
 
+@media (min-width: 761px) {
+    .hero-index {
+        order: -1;
+    }
+}
+
