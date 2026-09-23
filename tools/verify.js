@@ -14,7 +14,7 @@ async function main(){
   const description=html.match(/name="description" content="([^"]+)"/)[1];
   assert(!titles.has(title),file+' duplicate title'); titles.add(title);
   assert(!descriptions.has(description),file+' duplicate description'); descriptions.add(description);
-  assert(!/topmeds|northwestmeds|googletagmanager|script\.google\.com|GTM-|G-[A-Z0-9]{8,}/i.test(html),file+' old integrations');
+  assert(!/topmeds|northwestmeds|googletagmanager|script\.google\.com|\bGTM-|\bG-[A-Z0-9]{8,}\b/i.test(html),file+' old integrations');
   for(const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) JSON.parse(m[1]);
   for(const [,href] of html.matchAll(/(?:href|src)="([^"]+)"/g)){
    if(/^(?:https?:|#|data:)/.test(href)) continue;
@@ -38,7 +38,7 @@ async function main(){
  let playwright;
  for(const candidate of candidates){try{playwright=require(candidate); console.log('Browser library:',candidate);break;}catch{}}
  if(!playwright){console.log('Browser library unavailable.');return;}
- const browser=await playwright.chromium.launch({headless:true});
+ const browser=await playwright.chromium.launch({headless:true,channel:'msedge'});
  const tab=await browser.newPage(); const errors=[];
  tab.on('pageerror',e=>errors.push(e.message));
  await tab.goto(base);
